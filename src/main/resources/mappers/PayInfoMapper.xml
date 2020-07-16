@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyjblogs.mmall.dao.PayInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zyjblogs.mmall.pojo.PayInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="userId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="orderNo" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="payPlatform" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="platformNumber" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="platformStatus" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="updateTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userId, orderNo, payPlatform, platformNumber, platformStatus, createTime, 
+    updateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_pay_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_pay_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zyjblogs.mmall.pojo.PayInfo" >
+    insert into t_pay_info (id, userId, orderNo, 
+      payPlatform, platformNumber, platformStatus, 
+      createTime, updateTime)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, 
+      #{payPlatform,jdbcType=INTEGER}, #{platformNumber,jdbcType=VARCHAR}, #{platformStatus,jdbcType=VARCHAR}, 
+      now(), now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyjblogs.mmall.pojo.PayInfo" >
+    insert into t_pay_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        userId,
+      </if>
+      <if test="orderNo != null" >
+        orderNo,
+      </if>
+      <if test="payPlatform != null" >
+        payPlatform,
+      </if>
+      <if test="platformNumber != null" >
+        platformNumber,
+      </if>
+      <if test="platformStatus != null" >
+        platformStatus,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="updateTime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="payPlatform != null" >
+        #{payPlatform,jdbcType=INTEGER},
+      </if>
+      <if test="platformNumber != null" >
+        #{platformNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="platformStatus != null" >
+        #{platformStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyjblogs.mmall.pojo.PayInfo" >
+    update t_pay_info
+    <set >
+      <if test="userId != null" >
+        userId = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null" >
+        orderNo = #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="payPlatform != null" >
+        payPlatform = #{payPlatform,jdbcType=INTEGER},
+      </if>
+      <if test="platformNumber != null" >
+        platformNumber = #{platformNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="platformStatus != null" >
+        platformStatus = #{platformStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        updateTime = now(),
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyjblogs.mmall.pojo.PayInfo" >
+    update t_pay_info
+    set userId = #{userId,jdbcType=INTEGER},
+      orderNo = #{orderNo,jdbcType=BIGINT},
+      payPlatform = #{payPlatform,jdbcType=INTEGER},
+      platformNumber = #{platformNumber,jdbcType=VARCHAR},
+      platformStatus = #{platformStatus,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
