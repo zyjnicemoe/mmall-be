@@ -27,7 +27,7 @@ public class StatisticManageController {
     public IOrderService iOrderService;
     @RequestMapping("base_count.do")
     public ServerResponse baseCount(HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "请用管理员登录");
         }

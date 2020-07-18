@@ -29,7 +29,7 @@ public class CategoryManageController {
     @RequestMapping("get_category.do")
     public ServerResponse<List<Category>> getCategory(@RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId,
                                                       HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
         }
@@ -43,7 +43,7 @@ public class CategoryManageController {
     public ServerResponse addCategory(@RequestParam(value = "parentId", defaultValue = "0") Integer parentId,
                                                       @RequestParam(value = "categoryName", required = false) String categoryName,
                                                       HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
         }
@@ -58,7 +58,7 @@ public class CategoryManageController {
     public ServerResponse setCategoryName(@RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId,
                                                       @RequestParam(value = "categoryName", required = false) String categoryName,
                                                       HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
         }
@@ -72,7 +72,7 @@ public class CategoryManageController {
     @RequestMapping("get_deep_category.do")
     public ServerResponse<List<Category>> getDeepCategory(@RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId,
                                                           HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
         }

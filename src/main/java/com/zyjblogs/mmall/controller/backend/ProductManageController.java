@@ -41,7 +41,7 @@ public class ProductManageController {
     public ServerResponse<PageInfo> list(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                          @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
                                          HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
         }
@@ -58,7 +58,7 @@ public class ProductManageController {
                                            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                            @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
                                            HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
         }
@@ -70,7 +70,7 @@ public class ProductManageController {
     }
     @RequestMapping("upload.do")
     public ServerResponse upload(MultipartFile upload_file, HttpSession session ) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
         }
@@ -89,7 +89,7 @@ public class ProductManageController {
     }
     @RequestMapping("detail.do")
     public ServerResponse<ProductDetailVo> detail(Integer productId,HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
         }
@@ -102,7 +102,7 @@ public class ProductManageController {
 
     @RequestMapping("set_sale_status.do")
     public ServerResponse<String> setSaleStatus(Integer productId,Integer status,HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
         }
@@ -116,7 +116,7 @@ public class ProductManageController {
 
     @RequestMapping("save.do")
     public ServerResponse save(Product product,HttpSession session) {
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请先登录");
         }
@@ -130,7 +130,7 @@ public class ProductManageController {
     @ResponseBody
     public Map richtextImgUpload(HttpSession session, @RequestParam(value = "upload_file",required = false) MultipartFile upload_file, HttpServletRequest request, HttpServletResponse response) {
         Map resultMap = Maps.newHashMap();
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        User user = (User) session.getAttribute(Const.CURRENT_Admin);
         if (user == null) {
             resultMap.put("success", false);
             resultMap.put("msg", "请登录管理员");

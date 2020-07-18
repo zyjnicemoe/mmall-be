@@ -26,7 +26,7 @@ public class UserManageController {
         if(response.isSuccess()){
              user=response.getData();
             if (user.getRole()==Const.Role.ROLE_ADMIN) {
-                session.setAttribute(Const.CURRENT_USER, user);
+                session.setAttribute(Const.CURRENT_Admin, user);
             }else {
                 ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"请以管理员身份登录");
             }
@@ -36,7 +36,7 @@ public class UserManageController {
 
     @RequestMapping(value = "logout.do",method = RequestMethod.POST)
     public ServerResponse<String> logout(HttpSession session){
-        session.removeAttribute(Const.CURRENT_USER);
+        session.removeAttribute(Const.CURRENT_Admin);
         return ServerResponse.createBySuccess();
     }
 
