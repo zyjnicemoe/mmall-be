@@ -19,12 +19,11 @@ public class UserManageController {
 
     @Autowired
     private IUserService userService;
-    private User user;
     @RequestMapping(value = "login.do",method = RequestMethod.POST)
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse<User> response = userService.login(username,password);
         if(response.isSuccess()){
-             user=response.getData();
+            User  user=response.getData();
             if (user.getRole()==Const.Role.ROLE_ADMIN) {
                 session.setAttribute(Const.CURRENT_Admin, user);
             }else {
