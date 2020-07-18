@@ -215,5 +215,9 @@
       </foreach>
     </if>
   </select>
+    <select id="productCount" resultType="java.lang.Integer">
+      select count(id)
+      from t_product;
+    </select>
 
 </mapper>

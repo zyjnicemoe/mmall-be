@@ -42,7 +42,7 @@ public class FileServiceImpl implements IFileService {
             FTPUtil.uploadFile(Lists.newArrayList(targetFile));
             //已经上传到ftp服务器上
 
-            QiniuUtil.uploadFile(targetFile);
+          QiniuUtil.uploadFile(targetFile);
 
             //targetFile.delete();
         } catch (IOException e) {

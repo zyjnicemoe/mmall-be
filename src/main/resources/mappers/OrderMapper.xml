@@ -235,18 +235,10 @@
     from t_order
     ORDER BY  createTime desc
   </select>
-
-
-
-
-
-
-
-
-
-
-
-
+    <select id="orderCount" resultType="java.lang.Integer">
+      select count(id)
+      from t_order;
+    </select>
 
 
 </mapper>

@@ -224,29 +224,10 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public Integer productCount() {
+        return productMapper.productCount();
+    }
 
 
 }

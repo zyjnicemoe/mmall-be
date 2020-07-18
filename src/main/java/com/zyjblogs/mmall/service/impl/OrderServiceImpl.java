@@ -581,28 +581,10 @@ public class OrderServiceImpl implements IOrderService {
         return ServerResponse.createByErrorMessage("订单不存在");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public Integer orderCount() {
+        return orderMapper.orderCount();
+    }
 
 
 }

@@ -184,4 +184,9 @@ public class UserServiceImpl implements IUserService {
         }
         return ServerResponse.createByError();
     }
+
+    @Override
+    public Integer userCount() {
+        return userMapper.userCount();
+    }
 }

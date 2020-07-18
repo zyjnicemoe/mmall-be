@@ -209,9 +209,9 @@
     where email = #{email}
     and id != #{userId}
   </select>
-
-
-
+    <select id="userCount" resultType="java.lang.Integer">
+      select count(id) from t_user;
+    </select>
 
 
 </mapper>

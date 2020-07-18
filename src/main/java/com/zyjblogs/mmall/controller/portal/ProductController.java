@@ -29,7 +29,7 @@ public class ProductController {
     public ServerResponse<PageInfo> list(@RequestParam(value = "categoryId",required = false)    Integer categoryId,
                                          @RequestParam(value = "keyword",required = false)    String keyword,
                                          @RequestParam(value = "pageNum"   ,defaultValue = "1")  Integer pageNum,
-                                         @RequestParam(value = "categoryId",defaultValue = "10") Integer pageSize,
+                                         @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize,
                                          @RequestParam(value = "orderBy",defaultValue = "")   String orderBy){
 
         System.out.println(keyword);
