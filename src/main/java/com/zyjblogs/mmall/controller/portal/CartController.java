@@ -16,103 +16,86 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/cart/")
 public class CartController {
     @Resource
-    public ICartService iCartService;
+    ICartService iCartService;
+
     @RequestMapping("list.do")
     public ServerResponse<CartVo> list(HttpSession session){
-        User user=(User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
-        }else
-        {
-            return iCartService.list(user.getId());
         }
+        return iCartService.list(user.getId());
     }
 
     @RequestMapping("add.do")
     public ServerResponse<CartVo> add(HttpSession session,Integer productId,Integer count){
-        User user=(User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
-        }else
-        {
-            return iCartService.add(user.getId(),productId,count);
         }
+        return iCartService.add(user.getId(),productId,count);
     }
 
     @RequestMapping("update.do")
     public ServerResponse<CartVo> update(HttpSession session,Integer productId,Integer count){
-        User user=(User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
-        }else
-        {
-            return iCartService.update(user.getId(),productId,count);
         }
+        return iCartService.update(user.getId(),productId,count);
     }
 
     @RequestMapping("delete_product.do")
-    public ServerResponse<CartVo> delete_product(HttpSession session,String productIds){
-        User user=(User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null){
+    public ServerResponse<CartVo> update(HttpSession session,String productIds){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
-        }else
-        {
-            return iCartService.deleteProduct(user.getId(),productIds);
         }
+        return iCartService.deleteProduct(user.getId(),productIds);
     }
 
     @RequestMapping("select.do")
     public ServerResponse<CartVo> select(HttpSession session,Integer productId){
-        User user=(User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
-        }else
-        {
-            return iCartService.selectOrUnSelect(user.getId(),productId,1);
         }
+        return iCartService.selectOrUnSelect(user.getId(),productId,1);
     }
 
     @RequestMapping("un_select.do")
-    public ServerResponse<CartVo> un_select(HttpSession session,Integer productId){
-        User user=(User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null){
+    public ServerResponse<CartVo> unSelect(HttpSession session,Integer productId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
-        }else
-        {
-            return iCartService.selectOrUnSelect(user.getId(),productId,0);
         }
+        return iCartService.selectOrUnSelect(user.getId(),productId,0);
     }
 
     @RequestMapping("select_all.do")
     public ServerResponse<CartVo> selectAll(HttpSession session){
-        User user=(User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
-        }else
-        {
-            return iCartService.selectOrUnSelect(user.getId(),null,1);
         }
+        return iCartService.selectOrUnSelect(user.getId(),null,1);
+    }
 
-    } @RequestMapping("un_select_all.do")
-    public ServerResponse<CartVo> unSelectAll(HttpSession session){
-        User user=(User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null){
+    @RequestMapping("un_select_all.do")
+    public ServerResponse<CartVo> unSelectAll(HttpSession session,Integer productId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
-        }else{
-            return iCartService.selectOrUnSelect(user.getId(),null,0);
         }
+        return iCartService.selectOrUnSelect(user.getId(),null,0);
     }
 
     @RequestMapping("get_cart_product_count.do")
-    public ServerResponse<Integer> getCartProduCtcount(HttpSession session){
-        User user=(User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null){
+    public ServerResponse<Integer> getCartProductCount(HttpSession session){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
             return ServerResponse.createByError();
-        }else
-        {
-            return iCartService.getCartProductCount(user.getId());
         }
+        return iCartService.getCartProductCount(user.getId());
     }
-
-
 }

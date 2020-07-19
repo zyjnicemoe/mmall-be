@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
 @Mapper
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer id);
@@ -28,3 +27,4 @@ public interface ProductMapper {
 
     int productCount();
 }
+

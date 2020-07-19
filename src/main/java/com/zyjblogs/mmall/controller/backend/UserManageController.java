@@ -27,7 +27,7 @@ public class UserManageController {
             if (user.getRole()==Const.Role.ROLE_ADMIN) {
                 session.setAttribute(Const.CURRENT_Admin, user);
             }else {
-                ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"请以管理员身份登录");
+                return  ServerResponse.createByErrorCodeMessage(ResponseCode.ERROR.getCode(),"请以管理员身份登录");
             }
         }
         return response;

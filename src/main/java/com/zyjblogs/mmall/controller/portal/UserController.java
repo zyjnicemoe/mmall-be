@@ -10,15 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-//@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/user/")
+@RequestMapping(value="/user/",method = {RequestMethod.GET,RequestMethod.POST})
 public class UserController {
 
     @Autowired
     private IUserService userService;
 
-    @RequestMapping(value = "login.do",method = RequestMethod.POST)
+    @RequestMapping(value = "login.do")
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse<User> response = userService.login(username,password);
         if(response.isSuccess()){
@@ -107,34 +106,6 @@ public class UserController {
         }
         return userService.getInformation(currentUser.getId());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
