@@ -5,10 +5,17 @@ import com.zyjblogs.mmall.common.ResponseCode;
 import com.zyjblogs.mmall.common.ServerResponse;
 import com.zyjblogs.mmall.pojo.User;
 import com.zyjblogs.mmall.service.IUserService;
+import com.zyjblogs.mmall.util.CreateVerifiCodeImage;
+import org.apache.ibatis.javassist.compiler.JvstCodeGen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 @RestController
 @RequestMapping(value="/user/",method = {RequestMethod.GET,RequestMethod.POST})
@@ -17,13 +24,38 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @RequestMapping(value = "login.do")
-    public ServerResponse<User> login(String username, String password, HttpSession session){
-        ServerResponse<User> response = userService.login(username,password);
-        if(response.isSuccess()){
-            session.setAttribute(Const.CURRENT_USER,response.getData());
+    /**
+     *  获取并显示验证码图片
+     */
+    @GetMapping("getVerifiCodeImage.do")
+    public void getVerifiCodeImage(HttpServletRequest request, HttpServletResponse response) {
+        // 验证码图片
+        BufferedImage verifiCodeImage = CreateVerifiCodeImage.getVerifiCodeImage();
+        // 验证码
+        String verifiCode = String.valueOf(CreateVerifiCodeImage.getVerifiCode());
+        // 将验证码图片输出到登录页面
+        try {
+            ImageIO.write(verifiCodeImage, "JPEG", response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return response;
+        // 存储验证码Session
+        request.getSession().setAttribute("verifiCode", verifiCode);
+//        System.out.println(verifiCode);
+    }
+
+    @RequestMapping(value = "login.do")
+    public ServerResponse<User> login(String username, String password,String code, HttpSession session,HttpServletRequest request){
+        // 校验验证码信息
+        String vcode = (String) request.getSession().getAttribute("verifiCode");
+        if (vcode.equalsIgnoreCase(code)){
+            ServerResponse<User> response = userService.login(username,password);
+            if(response.isSuccess()){
+                session.setAttribute(Const.CURRENT_USER,response.getData());
+            }
+            return response;
+        }
+        return ServerResponse.createByErrorMessage("验证码错误");
     }
 
     @RequestMapping(value = "logout.do",method = RequestMethod.POST)
