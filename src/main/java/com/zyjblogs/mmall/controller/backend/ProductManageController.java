@@ -126,6 +126,8 @@ public class ProductManageController {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
     }
+
+
     @RequestMapping("richtext_img_upload.do")
     @ResponseBody
     public Map richtextImgUpload(HttpSession session, @RequestParam(value = "upload_file",required = false) MultipartFile upload_file, HttpServletRequest request, HttpServletResponse response) {
@@ -145,6 +147,7 @@ public class ProductManageController {
                 return resultMap;
             }
             String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
+//            String url =  "http://qdsytx1ka.bkt.clouddn.com/"+targetFileName;
             resultMap.put("success", true);
             resultMap.put("msg", "上传成功");
             resultMap.put("file_path", url);

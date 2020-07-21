@@ -2,7 +2,6 @@ package com.zyjblogs.mmall.service.impl;
 
 import com.google.common.collect.Lists;
 import com.zyjblogs.mmall.service.IFileService;
-import com.zyjblogs.mmall.util.FTPUtil;
 import com.zyjblogs.mmall.util.QiniuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,12 +38,12 @@ public class FileServiceImpl implements IFileService {
             file.transferTo(targetFile);
             //文件已经上传成功了
 
-            FTPUtil.uploadFile(Lists.newArrayList(targetFile));
+           // FTPUtil.uploadFile(Lists.newArrayList(targetFile));
             //已经上传到ftp服务器上
 
-          QiniuUtil.uploadFile(targetFile);
+            QiniuUtil.uploadFile(targetFile);
 
-            //targetFile.delete();
+//            targetFile.delete();
         } catch (IOException e) {
             logger.error("上传文件异常",e);
             return null;

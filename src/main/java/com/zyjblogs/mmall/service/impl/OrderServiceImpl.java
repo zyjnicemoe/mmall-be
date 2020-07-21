@@ -19,10 +19,7 @@ import com.zyjblogs.mmall.common.ServerResponse;
 import com.zyjblogs.mmall.dao.*;
 import com.zyjblogs.mmall.pojo.*;
 import com.zyjblogs.mmall.service.IOrderService;
-import com.zyjblogs.mmall.util.BigDecimalUtil;
-import com.zyjblogs.mmall.util.DateTimeUtil;
-import com.zyjblogs.mmall.util.FTPUtil;
-import com.zyjblogs.mmall.util.PropertiesUtil;
+import com.zyjblogs.mmall.util.*;
 import com.zyjblogs.mmall.vo.OrderItemVo;
 import com.zyjblogs.mmall.vo.OrderProductVo;
 import com.zyjblogs.mmall.vo.OrderVo;
@@ -439,11 +436,12 @@ public class OrderServiceImpl implements IOrderService {
                 ZxingUtils.getQRCodeImge(response.getQrCode(), 256, qrPath);
 
                 File targetFile = new File(path,qrFileName);
-                try {
-                    FTPUtil.uploadFile(Lists.newArrayList(targetFile));
-                } catch (IOException e) {
-                    logger.error("上传二维码异常",e);
-                }
+//                try {
+                      QiniuUtil.uploadFile(targetFile);
+//                    FTPUtil.uploadFile(Lists.newArrayList(targetFile));
+//                } catch (IOException e) {
+//                    logger.error("上传二维码异常",e);
+//                }
                 logger.info("qrPath:" + qrPath);
                 String qrUrl = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFile.getName();
                 resultMap.put("qrUrl",qrUrl);

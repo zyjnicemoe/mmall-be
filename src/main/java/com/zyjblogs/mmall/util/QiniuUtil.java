@@ -8,36 +8,38 @@ import java.io.IOException;
 
 import com.qiniu.common.QiniuException;  
 import com.qiniu.http.Response;
-import com.qiniu.storage.UploadManager;  
+import com.qiniu.storage.UploadManager;
+
+
+
 //https://search.maven.org/artifact/com.qiniu/qiniu-java-sdk/7.0.3/jar
 public class QiniuUtil {
       
     /**基本配置-从七牛管理后台拿到*/  
   //设置好账号的ACCESS_KEY和SECRET_KEY  
-  static String ACCESS_KEY = "1Y92kXm4fdDVcGPO3K61hGPPQ3kdp32WaooveZ4q";  
-  static String SECRET_KEY = "Be2VriPLy5PmdmU3_64xKPrnbMYxLerqzXw-g4LU";  
+  static String ACCESS_KEY = "JXbPCLF2PQ7ORTViOilqEoYIbnQXoVNKGYC_KWBp";
+  static String SECRET_KEY = "rxyLZnzwRHtTxtWNS9D5uKK5e_JWfmvaJzsFooUG";
   //要上传的空间名--  
-  static String bucketName = "mma";
+  static String bucketName = "zyjmmall";
     
     
     
-  /**指定保存到七牛的文件名--同名上传会报错  {"error":"file exists"}*/  
-  /** {"hash":"FrQF5eX_kNsNKwgGNeJ4TbBA0Xzr","key":"aa1.jpg"} 正常返回 key为七牛空间地址 http:/xxxx.com/aa1.jpg */  
+//  /** {"hash":"FrQF5eX_kNsNKwgGNeJ4TbBA0Xzr","key":"aa1.jpg"} 正常返回 key为七牛空间地址 http:/xxxx.com/aa1.jpg */
   //上传文件的路径  
 //  String FilePath ="D:\\1.png";  
 ////上传到七牛后保存的文件名    访问为：http://oswj11a86.bkt.clouddn.com/daimo6.png
 //  String key = "daimo6.png";    
 //  
-//  //密钥配置  
-//  Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);  
-//  //创建上传对象  
-//  UploadManager uploadManager =new UploadManager(new Configuration()); 
-//    
-//  
-//  //简单上传，使用默认策略，只需要设置上传的空间名就可以了  
-//  public String getUpToken(){  
-//      return auth.uploadToken(bucketname);  
-//  }  
+//  //密钥配置
+//  Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+//  //创建上传对象
+//  UploadManager uploadManager =new UploadManager(new Configuration());
+//
+//
+//  //简单上传，使用默认策略，只需要设置上传的空间名就可以了
+//  public String getUpToken(){
+//      return auth.uploadToken(bucketname);
+//  }
 //
 
   public static void uploadFile(File file){
@@ -63,8 +65,8 @@ public class QiniuUtil {
       }         
   }  
   
-  public static void main(String args[]) throws IOException{    
-    new QiniuUtil().uploadFile(new File("d:\\9ebd3ec1-d7bd-4bb8-a104-7360905fcc0d.jpg"));
+  public static void main(String args[]) throws IOException{
+    new QiniuUtil().uploadFile(new File("d:\\7206e2e0d2554695.jpg"));
   }  
   
 }  
