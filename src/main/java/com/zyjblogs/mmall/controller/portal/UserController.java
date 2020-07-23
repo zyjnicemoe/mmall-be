@@ -57,7 +57,6 @@ public class UserController {
         }
         return ServerResponse.createByErrorMessage("验证码错误");
     }
-
     @RequestMapping(value = "logout.do",method = RequestMethod.POST)
     public ServerResponse<String> logout(HttpSession session){
         session.removeAttribute(Const.CURRENT_USER);
