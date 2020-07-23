@@ -65,8 +65,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "register.do",method = RequestMethod.POST)
-    public ServerResponse<String> register(User user){
-        return userService.register(user);
+    public ServerResponse<String> register(User user, Integer sms, HttpSession session){
+
+        Integer smsCode= (Integer) session.getAttribute("smsCode");
+        System.out.println("smsCode"+smsCode);
+        System.out.println("sms"+sms);
+        if (smsCode.equals(sms)){
+            return userService.register(user);
+        }
+        return ServerResponse.createByErrorMessage("手机验证码有误");
     }
 
 
